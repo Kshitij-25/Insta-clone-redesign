@@ -22,7 +22,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     _name = widget.user.name;
+    _username = widget.user.username;
     _bio = widget.user.bio;
+    _email = widget.user.email;
   }
 
   _submit() {
