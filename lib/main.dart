@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_redesign/pages/feed_screen.dart';
+import 'package:insta_redesign/pages/home_screen.dart';
 import 'package:insta_redesign/pages/login_screen.dart';
 import 'package:insta_redesign/pages/signup_screen.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.onAuthStateChanged,
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            return FeedScreen();
+            return HomeScreen();
           } else {
             return LoginScreen();
           }
