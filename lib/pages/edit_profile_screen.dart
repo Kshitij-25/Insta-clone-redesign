@@ -21,10 +21,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
+    print(_name + "Kshitij");
     _name = widget.user.name;
     _username = widget.user.username;
     _bio = widget.user.bio;
     _email = widget.user.email;
+
   }
 
   _submit() {
@@ -38,7 +40,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           bio: _bio,
           email: _email,
           profileImageUrl: _profileImageUrl);
-          Navigator.pop(context); 
+      Navigator.pop(context);
     }
   }
 
@@ -54,9 +56,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         elevation: 10.0,
         actions: <Widget>[
           FlatButton(
-            onPressed: () {
-              _submit();
-            },
+            onPressed: _submit,
             child: Text(
               "Done",
               style: TextStyle(color: Colors.blue, fontSize: 18.0),
@@ -144,7 +144,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _phone,
                       style: TextStyle(fontSize: 18.0),
                       keyboardType: TextInputType.phone,
-                      validator: (input) => input.trim().length !=10
+                      validator: (input) => input.trim().length != 10
                           ? "Please enter a valid phone number"
                           : null,
                       onSaved: (input) => _phone = input,
