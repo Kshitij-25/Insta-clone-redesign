@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta_redesign/Models/user_model.dart';
+import 'package:insta_redesign/services/database_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final User user;
@@ -21,12 +22,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    print(_name + "Kshitij");
-    _name = widget.user.name;
-    _username = widget.user.username;
-    _bio = widget.user.bio;
-    _email = widget.user.email;
-
+    _name = widget.user?.name;
+    _username = widget.user?.username;
+    _bio = widget.user?.bio;
+    _email = widget.user?.email;
+    print(_name);
   }
 
   _submit() {
@@ -40,6 +40,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           bio: _bio,
           email: _email,
           profileImageUrl: _profileImageUrl);
+          DatabaseService.updateUser(user);
       Navigator.pop(context);
     }
   }
