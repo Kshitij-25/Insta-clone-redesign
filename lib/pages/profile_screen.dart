@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_redesign/Models/user_model.dart';
 import 'package:insta_redesign/pages/edit_profile_screen.dart';
+import 'package:insta_redesign/pages/profile_drawer.dart';
 import 'package:insta_redesign/util/constant.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -31,10 +33,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Icon(Icons.lock,size: 15.0,),
-                    Text(user.username,style: TextStyle(fontSize: 15.0),)
+                    Icon(
+                      Icons.lock,
+                      size: 15.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 100),
+                      child: Text(
+                        user.username,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.menu),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.downToUp,
+                              child: ProfileDrawer()));
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -44,7 +65,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 50.0,
-                      backgroundImage: AssetImage("assets/images/pk.jpg"),
+                      backgroundColor: Colors.grey,
+                      backgroundImage: user.profileImageUrl.isEmpty
+                          ? AssetImage('assets/images/placeholder.jpg')
+                          : CachedNetworkImageProvider(user.profileImageUrl),
                     ),
                     Expanded(
                       child: Column(
@@ -127,7 +151,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
                   child: OutlineButton(
                     onPressed: () {
-                      Navigator.push(context, PageTransition(type: PageTransitionType.downToUp,child: EditProfileScreen()));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.downToUp,
+                              child: EditProfileScreen()));
                     },
                     child: Text("Edit Profile"),
                     borderSide: BorderSide(color: Colors.white30),

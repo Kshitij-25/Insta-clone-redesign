@@ -22,7 +22,7 @@ class AuthService {
           'profileImageUrl': '',
           'username': username
         });
-        Navigator.pushReplacementNamed(context, "/FeedScreen");
+        Navigator.pop(context);
       }
     } catch (e) {
       print(e);
