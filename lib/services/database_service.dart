@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:insta_redesign/Models/user_model.dart';
 import 'package:insta_redesign/util/constant.dart';
 
-
 class DatabaseService {
   static void updateUser(User user) {
     usersRef.document(user.id).updateData({

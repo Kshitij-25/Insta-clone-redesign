@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:insta_redesign/Models/user_data.dart';
+import 'package:provider/provider.dart';
 
 class AuthService {
   static final _auth = FirebaseAuth.instance;
   static final _firestore = Firestore.instance;
-  static void signUpUser(
-      BuildContext context, String fullname, String username, String email, String password) async {
+  static void signUpUser(BuildContext context, String fullname, String username,
+      String email, String password) async {
     try {
       AuthResult authResult = await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -22,6 +22,7 @@ class AuthService {
           'profileImageUrl': '',
           'username': username
         });
+        Provider.of<UserData>(context).currentUserId = signedInUser.uid;
         Navigator.pop(context);
       }
     } catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_redesign/services/auth_service.dart';
 
 class ActivityScreen extends StatefulWidget {
   @override
@@ -10,7 +11,12 @@ class _ActivityScreenState extends State<ActivityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center (child: Text('Activity Screen'),),
+      body: Center(
+        child: FlatButton(
+          onPressed: () => AuthService.logout(),
+          child: Text('LOGOUT'),
+        ),
+      ),
     );
   }
 }

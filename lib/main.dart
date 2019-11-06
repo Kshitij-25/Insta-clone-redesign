@@ -15,9 +15,8 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.onAuthStateChanged,
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            return HomeScreen(
-              userId: snapshot.data.uid,
-            );
+            Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
+            return HomeScreen();
           } else {
             return LoginScreen();
           }
@@ -28,18 +27,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       builder: (context) => UserData(),
-      child: MaterialApp(
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.blue,
+      child: ChangeNotifierProvider(
+        builder: (context) => UserData(),
+        child: MaterialApp(
+          theme: ThemeData(
+            brightness: Brightness.dark,
+            primarySwatch: Colors.blue,
+          ),
+          debugShowCheckedModeBanner: false,
+          home: _getScreen(),
+          routes: <String, WidgetBuilder>{
+            '/LoginScreen': (BuildContext context) => new LoginScreen(),
+            '/SignupScreen': (BuildContext context) => new SignupScreen(),
+            '/FeedScreen': (BuildContext context) => new FeedScreen(),
+          },
         ),
-        debugShowCheckedModeBanner: false,
-        home: _getScreen(),
-        routes: <String, WidgetBuilder>{
-          '/LoginScreen': (BuildContext context) => new LoginScreen(),
-          '/SignupScreen': (BuildContext context) => new SignupScreen(),
-          '/FeedScreen': (BuildContext context) => new FeedScreen(),
-        },
       ),
     );
   }
