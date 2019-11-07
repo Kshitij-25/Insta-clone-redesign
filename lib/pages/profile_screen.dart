@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_redesign/Models/user_model.dart';
 import 'package:insta_redesign/pages/edit_profile_screen.dart';
-import 'package:insta_redesign/pages/profile_drawer.dart';
+
 import 'package:insta_redesign/util/constant.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -49,11 +49,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     IconButton(
                       icon: Icon(Icons.menu),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.downToUp,
-                              child: ProfileDrawer()));
+                        showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15.0),
+                                topRight: Radius.circular(15.0)),
+                          ),
+                          builder: (context) => Column(
+                            mainAxisSize: MainAxisSize.max,
+                            // mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Center(
+                                  child: Container(
+                                    color: Colors.grey,
+                                    height: 5.0,
+                                    width: 50.0,
+                                  ),
+                                ),
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.settings),
+                                label: Text("Settings"),
+                                onPressed: () {},
+                              ),
+                              Divider(
+                                color: Colors.white30,
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.settings_backup_restore),
+                                label: Text("Archive"),
+                                onPressed: () {},
+                              ),
+                              Divider(
+                                color: Colors.white30,
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.slow_motion_video),
+                                label: Text("Your Activity"),
+                                onPressed: () {},
+                              ),
+                              Divider(
+                                color: Colors.white30,
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.center_focus_weak),
+                                label: Text("Nametag"),
+                                onPressed: () {},
+                              ),
+                              Divider(
+                                color: Colors.white30,
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.bookmark_border),
+                                label: Text("Saved"),
+                                onPressed: () {},
+                              ),
+                              Divider(
+                                color: Colors.white30,
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.format_list_bulleted),
+                                label: Text("Close Friends"),
+                                onPressed: () {},
+                              ),
+                              Divider(
+                                color: Colors.white30,
+                              ),
+                              FlatButton.icon(
+                                icon: Icon(Icons.person_add),
+                                label: Text("Discover People"),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ],
